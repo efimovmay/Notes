@@ -8,3 +8,6 @@
 "Return.text" = "Вернуться";
 "Ok.text" = "Ок";
 "Error.text" = "Ошибка";
+
+// MARK: - NoteList strings
+"NoteList.title" = "Заметки";

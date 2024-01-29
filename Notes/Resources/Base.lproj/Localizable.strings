@@ -8,3 +8,6 @@
 "Return.text" = "Return";
 "Ok.text" = "Ok";
 "Error.text" = "Error";
+
+// MARK: - NoteList strings
+"NoteList.title" = "Notes";

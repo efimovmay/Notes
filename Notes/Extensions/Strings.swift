@@ -4,6 +4,9 @@
 //
 //  Created by Aleksey Efimov on 29.01.2024.
 //
+// swiftlint:disable all
+// swift-format-ignore-file
+// swiftformat:disable all
 
 import Foundation
 
@@ -17,30 +20,28 @@ import Foundation
 public enum L10n {
 	
 	public enum Error {
-		/// Error
 		public static let text = L10n.tr("Error.text", "Error.text")
 	}
 	
 	public enum No {
-		/// No
 		public static let text = L10n.tr("No.text", "No.text")
 	}
 	
 	public enum Ok {
-		/// Ok
 		public static let text = L10n.tr("Ok.text", "Ok.text")
 	}
 	
 	public enum Return {
-		/// Return
 		public static let text = L10n.tr("Return.text", "Return.text")
 	}
 	
 	public enum Yes {
-		/// Yes
 		public static let text = L10n.tr("Yes.text", "Yes.text")
 	}
 	
+	public enum NoteList {
+		public static let title = L10n.tr("NoteList.title", "Login.buttonTitle")
+	}
 	
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
