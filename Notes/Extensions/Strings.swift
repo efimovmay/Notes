@@ -20,27 +20,27 @@ import Foundation
 public enum L10n {
 	
 	public enum Error {
-		public static let text = L10n.tr("Error.text", "Error.text")
+		public static let text = L10n.tr("Localizable", "Error.text")
 	}
 	
 	public enum No {
-		public static let text = L10n.tr("No.text", "No.text")
+		public static let text = L10n.tr("Localizable", "No.text")
 	}
 	
 	public enum Ok {
-		public static let text = L10n.tr("Ok.text", "Ok.text")
+		public static let text = L10n.tr("Localizable", "Ok.text")
 	}
 	
 	public enum Return {
-		public static let text = L10n.tr("Return.text", "Return.text")
+		public static let text = L10n.tr("Localizable", "Return.text")
 	}
 	
 	public enum Yes {
-		public static let text = L10n.tr("Yes.text", "Yes.text")
+		public static let text = L10n.tr("Localizable", "Yes.text")
 	}
 	
 	public enum NoteList {
-		public static let title = L10n.tr("NoteList.title", "Login.buttonTitle")
+		public static let title = L10n.tr("Localizable", "NoteList.title")
 	}
 	
 }

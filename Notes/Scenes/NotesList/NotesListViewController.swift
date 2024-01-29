@@ -32,6 +32,7 @@ final class NotesListViewController: UITableViewController {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -39,10 +40,19 @@ final class NotesListViewController: UITableViewController {
 		presenter?.viewIsReady()
 	}
 }
+
+// MARK: - Actions
+
+private extension NotesListViewController {
+	@objc
+	func addTapped() {
+	//	interactor?.createTask()
+	}
+}
+
 // MARK: - UITableView
 
 extension NotesListViewController {
-
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		viewData.notes.count
 	}
@@ -59,15 +69,19 @@ extension NotesListViewController {
 }
 
 // MARK: - UI setup
-
 private extension NotesListViewController {
 	private func setupUI() {
-//		view.backgroundColor = Theme.backgroundColor
 		title = L10n.NoteList.title
 		navigationItem.setHidesBackButton(true, animated: true)
 		navigationController?.navigationBar.prefersLargeTitles = true
 		
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(
+			barButtonSystemItem: .add,
+			target: self,
+			action: #selector(addTapped)
+		)
 	}
 	
 	func getNoteForIndex(_ indexPath: IndexPath) -> String {
@@ -82,7 +96,6 @@ private extension NotesListViewController {
 	}
 }
 // MARK: - IMainViewController
-
 extension NotesListViewController: INotesListViewController {
 	
 	/// Метод отрисовки информации на экране.
