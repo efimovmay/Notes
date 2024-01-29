@@ -17,6 +17,8 @@
 		5B73F5412B67DDAD006BFCD6 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5402B67DDAD006BFCD6 /* Strings.swift */; };
 		5B73F5442B67E16C006BFCD6 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5432B67E16C006BFCD6 /* Sizes.swift */; };
 		5B73F5462B67E17D006BFCD6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5452B67E17D006BFCD6 /* Colors.swift */; };
+		5B73F54A2B67E30D006BFCD6 /* UIColor+Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5492B67E30D006BFCD6 /* UIColor+Dynamic.swift */; };
+		5B73F54C2B67E33D006BFCD6 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F54B2B67E33D006BFCD6 /* UIColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		5B73F5402B67DDAD006BFCD6 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5B73F5432B67E16C006BFCD6 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		5B73F5452B67E17D006BFCD6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5B73F5492B67E30D006BFCD6 /* UIColor+Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Dynamic.swift"; sourceTree = "<group>"; };
+		5B73F54B2B67E33D006BFCD6 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +69,12 @@
 		5B73F5192B67D264006BFCD6 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				5B73F5322B67D2DE006BFCD6 /* Common */,
+				5B73F5312B67D2CF006BFCD6 /* Extensions */,
+				5B73F5332B67D30E006BFCD6 /* Resources */,
 				5B73F5422B67DE84006BFCD6 /* Storage */,
 				5B73F5352B67D332006BFCD6 /* Scenes */,
 				5B73F5342B67D31D006BFCD6 /* Theme */,
-				5B73F5332B67D30E006BFCD6 /* Resources */,
-				5B73F5322B67D2DE006BFCD6 /* Common */,
-				5B73F5312B67D2CF006BFCD6 /* Extensions */,
 				5B73F51A2B67D264006BFCD6 /* AppDelegate.swift */,
 				5B73F51C2B67D264006BFCD6 /* SceneDelegate.swift */,
 				5B73F51E2B67D264006BFCD6 /* ViewController.swift */,
@@ -82,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				5B73F5402B67DDAD006BFCD6 /* Strings.swift */,
+				5B73F5492B67E30D006BFCD6 /* UIColor+Dynamic.swift */,
+				5B73F54B2B67E33D006BFCD6 /* UIColor+Hex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -116,6 +122,8 @@
 		5B73F5352B67D332006BFCD6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5B73F5472B67E22E006BFCD6 /* NotesList */,
+				5B73F5482B67E242006BFCD6 /* EditView */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -126,6 +134,20 @@
 				5B73F5232B67D264006BFCD6 /* Notes.xcdatamodeld */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		5B73F5472B67E22E006BFCD6 /* NotesList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NotesList;
+			sourceTree = "<group>";
+		};
+		5B73F5482B67E242006BFCD6 /* EditView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EditView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,8 +248,10 @@
 				5B73F5442B67E16C006BFCD6 /* Sizes.swift in Sources */,
 				5B73F51F2B67D264006BFCD6 /* ViewController.swift in Sources */,
 				5B73F51B2B67D264006BFCD6 /* AppDelegate.swift in Sources */,
+				5B73F54C2B67E33D006BFCD6 /* UIColor+Hex.swift in Sources */,
 				5B73F5462B67E17D006BFCD6 /* Colors.swift in Sources */,
 				5B73F5412B67DDAD006BFCD6 /* Strings.swift in Sources */,
+				5B73F54A2B67E30D006BFCD6 /* UIColor+Dynamic.swift in Sources */,
 				5B73F51D2B67D264006BFCD6 /* SceneDelegate.swift in Sources */,
 				5B73F5252B67D264006BFCD6 /* Notes.xcdatamodeld in Sources */,
 			);
