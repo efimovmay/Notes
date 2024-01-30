@@ -11,5 +11,9 @@ import CoreData
 
 @objc(Note)
 public class Note: NSManagedObject {
-
+	
+	// Возвращает первую строку текста
+	var title: String {
+		return text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).first ?? ""
+	}
 }

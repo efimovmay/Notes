@@ -9,19 +9,18 @@
 import Foundation
 import CoreData
 
-
 extension Note {
-
+	/// Модель note в CoreData
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Note> {
         return NSFetchRequest<Note>(entityName: "Note")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var text: String?
-    @NSManaged public var lastUpdate: Date?
-
+	/// Идентификатор
+	@NSManaged public var id: UUID! // swiftlint:disable:this implicitly_unwrapped_optional
+	/// Тело заметки
+	@NSManaged public var text: String! // swiftlint:disable:this implicitly_unwrapped_optional
+	/// Дата последнего обновления
+	@NSManaged public var lastUpdated: Date! // swiftlint:disable:this implicitly_unwrapped_optional
 }
 
-extension Note : Identifiable {
-
-}
+extension Note: Identifiable {}

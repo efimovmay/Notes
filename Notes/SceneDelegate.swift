@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	
 	func assemblyNotesList() -> UIViewController {
 		let viewController = NotesListViewController()
-		let presenter = NotesListPresenter(view: viewController)
+		let coreDataManager = CoreDataManager(modelName: "Note")
+		let presenter = NotesListPresenter(view: viewController, coreDataManager: coreDataManager)
 		viewController.presenter = presenter
 		return viewController
 	}

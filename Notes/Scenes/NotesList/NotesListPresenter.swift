@@ -22,13 +22,14 @@ protocol INotesListPresenter: AnyObject {
 class NotesListPresenter: INotesListPresenter {
 	
 	weak var view: INotesListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
-	
+	let coreDataManager: ICoreDataManager
 	/// Инициализатор презентера
 	/// - Parameters:
 	///   - view: Необходимая вьюха, на которой будет выводиться информация;
 	///   - taskManager: Источник информации для заданий.
-	required init(view: INotesListViewController) {
+	required init(view: INotesListViewController, coreDataManager: ICoreDataManager) {
 		self.view = view
+		self.coreDataManager = coreDataManager
 	}
 	
 	/// Обработка готовности экрана для отображения информации.
