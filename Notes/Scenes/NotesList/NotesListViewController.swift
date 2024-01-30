@@ -84,14 +84,14 @@ private extension NotesListViewController {
 		)
 	}
 	
-	func getNoteForIndex(_ indexPath: IndexPath) -> String {
+	func getNoteForIndex(_ indexPath: IndexPath) -> Note {
 		viewData.notes[indexPath.row]
 	}
 	
-	func configureCell(_ cell: UITableViewCell, with note: String) {
+	func configureCell(_ cell: UITableViewCell, with note: Note) {
 		var contentConfiguration = cell.defaultContentConfiguration()
 
-		contentConfiguration.text = note
+		contentConfiguration.text = note.title
 		cell.contentConfiguration = contentConfiguration
 	}
 }

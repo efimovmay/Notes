@@ -9,11 +9,15 @@
 import Foundation
 import CoreData
 
-@objc(Note)
 public class Note: NSManagedObject {
 	
-	// Возвращает первую строку текста
 	var title: String {
 		return text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).first ?? ""
+	}
+	
+	var desc: String {
+		var lines = text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+		lines.removeFirst()
+		return "\(lastUpdated.format()) \(lines.first ?? "")" // return second line
 	}
 }

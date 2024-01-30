@@ -22,14 +22,15 @@ protocol INotesListPresenter: AnyObject {
 class NotesListPresenter: INotesListPresenter {
 	
 	weak var view: INotesListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
-	let coreDataManager: ICoreDataManager
+//	let coreDataManager: ICoreDataManager
+	var notes: [Note] = []
 	/// Инициализатор презентера
 	/// - Parameters:
 	///   - view: Необходимая вьюха, на которой будет выводиться информация;
 	///   - taskManager: Источник информации для заданий.
-	required init(view: INotesListViewController, coreDataManager: ICoreDataManager) {
+	required init(view: INotesListViewController) {
 		self.view = view
-		self.coreDataManager = coreDataManager
+//		self.coreDataManager = coreDataManager
 	}
 	
 	/// Обработка готовности экрана для отображения информации.
@@ -40,7 +41,18 @@ class NotesListPresenter: INotesListPresenter {
 	/// Мапинг бизнес-моделей в модель для отображения.
 	/// - Returns: Возвращает модель для отображения.
 	private func mapViewData() -> NotesListModel.ViewData {
-		let notes = ["1", "2"]
+		CoreDataManager.shared.create("sdsf")
+		
+		
+		CoreDataManager.shared.fetchData { [unowned self] result in
+			switch result {
+			case .success(let notes):
+				self.notes = notes
+			case .failure(let error):
+				print(error.localizedDescription)
+			}
+		}
+	
 		return NotesListModel.ViewData(notes: notes)
 	}
 	

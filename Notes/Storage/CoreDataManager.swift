@@ -9,70 +9,73 @@ import Foundation
 import CoreData
 
 protocol ICoreDataManager {	
-	func load(completion: (() -> Void)?)
-	func save()
-	func createNote() -> Note
-	func fetchNotes(filter: String?) -> [Note]
+	func create(_ text: String)
+	func fetchData(completion: (Result<[Note], Error>) -> Void)
+	func update(_ note: Note, newText: String)
+	func deleteNote(_ note: Note)
+	func saveContext()
 }
 
 final class CoreDataManager: ICoreDataManager {
 	
-	// MARK: - Public properties
-	let persistentContainer: NSPersistentContainer
+	static let shared = CoreDataManager()
 	
-	var viewContext: NSManagedObjectContext {
-		return persistentContainer.viewContext
-	}
-	
-	// MARK: - Initialization
-	init(modelName: String) {
-		persistentContainer = NSPersistentContainer(name: modelName)
-	}
-	
-	// MARK: - Public methods
-	func load(completion: (() -> Void)? = nil) {
-		persistentContainer.loadPersistentStores { (description, error) in
-			guard error == nil else {
-				fatalError(error!.localizedDescription)
-			}
-			completion?()
-		}
-	}
-	
-	func save() {
-		if viewContext.hasChanges {
-			do {
-				try viewContext.save()
-			} catch {
-				print("An error ocurred while saving: \(error.localizedDescription)")
+	// MARK: - Core Data stack
+	private let persistentContainer: NSPersistentContainer = {
+		let container = NSPersistentContainer(name: "Notes")
+		container.loadPersistentStores { _, error in
+			if let error = error as NSError? {
+				fatalError("Unresolved error \(error), \(error.userInfo)")
 			}
 		}
+		return container
+	}()
+	
+	private let viewContext: NSManagedObjectContext
+	
+	private init() {
+		viewContext = persistentContainer.viewContext
 	}
-
-	func createNote() -> Note {
+	
+	// MARK: - CRUD
+	
+	func create(_ text: String) {
 		let note = Note(context: viewContext)
-		note.id = UUID()
-		note.text = ""
-		note.lastUpdated = Date()
-		save()
-		return note
+		note.text = text
+		saveContext()
 	}
 	
-	func fetchNotes(filter: String? = nil) -> [Note] {
-		let request: NSFetchRequest<Note> = Note.fetchRequest()
-		let sortDescriptor = NSSortDescriptor(keyPath: \Note.lastUpdated, ascending: false)
-		request.sortDescriptors = [sortDescriptor]
+	func fetchData(completion: (Result<[Note], Error>) -> Void) {
+		let fetchRequest = Note.fetchRequest()
 		
-		if let filter = filter {
-			let predicate = NSPredicate(format: "text contains[cd] %@", filter)
-			request.predicate = predicate
+		do {
+			let tasks = try viewContext.fetch(fetchRequest)
+			completion(.success(tasks))
+		} catch let error {
+			completion(.failure(error))
 		}
-		
-		return (try? viewContext.fetch(request)) ?? []
+	}
+	
+	func update(_ note: Note, newText: String) {
+		note.text = newText
+		note.lastUpdated = Date()
+		saveContext()
 	}
 	
 	func deleteNote(_ note: Note) {
 		viewContext.delete(note)
-		save()
+		saveContext()
+	}
+	
+	// MARK: - Core Data Saving support
+	func saveContext() {
+		if viewContext.hasChanges {
+			do {
+				try viewContext.save()
+			} catch {
+				let nserror = error as NSError
+				fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+			}
+		}
 	}
 }

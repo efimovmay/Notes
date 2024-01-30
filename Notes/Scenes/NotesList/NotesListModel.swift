@@ -11,6 +11,6 @@ enum NotesListModel {
 	/// Структура описывающая главный экран приложения
 	struct ViewData {
 		/// Содержит в себе список заметок для отображения
-		let notes: [String]
+		let notes: [Note]
 	}
 }
