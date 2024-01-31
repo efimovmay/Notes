@@ -21,7 +21,7 @@ final class NoteEditorViewController: UITableViewController {
 	private var viewData = NoteEditorModel.ViewData(text: "")
 	
 	// MARK: - Dependencies
-	var presenter: INotesListPresenter?
+	var presenter: INoteEditorPresenter?
 	
 	// MARK: - Private properties
 	private lazy var noteTextView = makeNoteTextView()

@@ -21,7 +21,8 @@ final class NoteEditorAssembler {
 	func assembly() -> NoteEditorViewController {
 		let viewController = NoteEditorViewController()
 		let presenter = NoteEditorPresenter(view: viewController, coreDataManager: coreDataManager)
-
+		viewController.presenter = presenter
+		
 		return viewController
 	}
 }

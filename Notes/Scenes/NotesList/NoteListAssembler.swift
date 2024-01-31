@@ -21,6 +21,7 @@ final class NoteListAssembler {
 	func assembly() -> NotesListViewController {
 		let viewController = NotesListViewController()
 		let presenter = NotesListPresenter(view: viewController, coreDataManager: coreDataManager)
+		viewController.presenter = presenter
 		
 		return viewController
 	}
