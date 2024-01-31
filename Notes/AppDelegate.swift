@@ -27,8 +27,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
 		}
 	}
-	
-	func applicationWillTerminate(_ application: UIApplication) {
-		CoreDataManager.shared.saveContext()
-	}
 }

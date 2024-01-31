@@ -87,7 +87,6 @@
 		5B73F5192B67D264006BFCD6 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				5B73F5322B67D2DE006BFCD6 /* Common */,
 				5B73F5312B67D2CF006BFCD6 /* Extensions */,
 				5B73F5332B67D30E006BFCD6 /* Resources */,
 				5B73F5422B67DE84006BFCD6 /* Storage */,
@@ -108,13 +107,6 @@
 				5B73F55E2B690D7C006BFCD6 /* Date+Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		5B73F5322B67D2DE006BFCD6 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		5B73F5332B67D30E006BFCD6 /* Resources */ = {

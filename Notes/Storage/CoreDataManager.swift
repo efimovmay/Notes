@@ -16,9 +16,9 @@ protocol ICoreDataManager {
 	func saveContext()
 }
 
-final class CoreDataManager: ICoreDataManager {
+class CoreDataManager: ICoreDataManager {
 	
-	static let shared = CoreDataManager()
+//	static let shared = CoreDataManager()
 	
 	// MARK: - Core Data stack
 	private let persistentContainer: NSPersistentContainer = {
@@ -33,7 +33,7 @@ final class CoreDataManager: ICoreDataManager {
 	
 	private let viewContext: NSManagedObjectContext
 	
-	private init() {
+	init() {
 		viewContext = persistentContainer.viewContext
 	}
 	

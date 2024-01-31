@@ -64,7 +64,16 @@ extension NotesListViewController {
 		return cell
 	}
 	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	override func tableView(
+		_ tableView: UITableView,
+		commit editingStyle: UITableViewCell.EditingStyle,
+		forRowAt indexPath: IndexPath
+	) {
+		if editingStyle == .delete {
+			tableView.deleteRows(at: [indexPath], with: .automatic)
+			let note = getNoteForIndex(indexPath)
+			presenter?.deleteNote(note: note)
+		}
 	}
 }
 
@@ -72,16 +81,23 @@ extension NotesListViewController {
 private extension NotesListViewController {
 	private func setupUI() {
 		title = L10n.NoteList.title
-		navigationItem.setHidesBackButton(true, animated: true)
 		navigationController?.navigationBar.prefersLargeTitles = true
 		
-		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+		let navBarAppearance = UINavigationBarAppearance()
+		navBarAppearance.titleTextAttributes = [.foregroundColor: Theme.mainColor]
+		navBarAppearance.largeTitleTextAttributes = [.foregroundColor: Theme.mainColor]
+		navBarAppearance.backgroundColor = Theme.navBarColor
+		
+		navigationController?.navigationBar.standardAppearance = navBarAppearance
+		navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(
 			barButtonSystemItem: .add,
 			target: self,
 			action: #selector(addTapped)
 		)
+		
+		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 	}
 	
 	func getNoteForIndex(_ indexPath: IndexPath) -> Note {
@@ -97,9 +113,7 @@ private extension NotesListViewController {
 }
 // MARK: - IMainViewController
 extension NotesListViewController: INotesListViewController {
-	
-	/// Метод отрисовки информации на экране.
-	/// - Parameter viewModel: данные для отрисовки на экране.
+
 	func render(viewData: NotesListModel.ViewData) {
 		self.viewData = viewData
 		tableView.reloadData()

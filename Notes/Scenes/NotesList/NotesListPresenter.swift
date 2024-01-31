@@ -16,21 +16,20 @@ protocol INotesListPresenter: AnyObject {
 	/// Пользователь выбрал строку  в таблице.
 	/// - Parameter indexPath: Индекс выбранной строки.
 	func didTaskSelected(at indexPath: IndexPath)
+	
+	func deleteNote(note: Note)
 }
 
 /// Презентер для главного экрана
 class NotesListPresenter: INotesListPresenter {
 	
 	weak var view: INotesListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
-//	let coreDataManager: ICoreDataManager
+	let coreDataManager: ICoreDataManager
 	var notes: [Note] = []
-	/// Инициализатор презентера
-	/// - Parameters:
-	///   - view: Необходимая вьюха, на которой будет выводиться информация;
-	///   - taskManager: Источник информации для заданий.
-	required init(view: INotesListViewController) {
+
+	required init(view: INotesListViewController, coreDataManager: ICoreDataManager) {
 		self.view = view
-//		self.coreDataManager = coreDataManager
+		self.coreDataManager = coreDataManager
 	}
 	
 	/// Обработка готовности экрана для отображения информации.
@@ -41,10 +40,9 @@ class NotesListPresenter: INotesListPresenter {
 	/// Мапинг бизнес-моделей в модель для отображения.
 	/// - Returns: Возвращает модель для отображения.
 	private func mapViewData() -> NotesListModel.ViewData {
-		CoreDataManager.shared.create("sdsf")
+		coreDataManager.create("sdsf")
 		
-		
-		CoreDataManager.shared.fetchData { [unowned self] result in
+		coreDataManager.fetchData { [unowned self] result in
 			switch result {
 			case .success(let notes):
 				self.notes = notes
@@ -59,7 +57,10 @@ class NotesListPresenter: INotesListPresenter {
 	/// Обработка выбранной пользователем строки таблицы.
 	/// - Parameter indexPath: Индекс, который выбрал пользователь.
 	func didTaskSelected(at indexPath: IndexPath) {
-
 		view.render(viewData: mapViewData())
+	}
+	
+	func deleteNote(note: Note) {
+		coreDataManager.deleteNote(note)
 	}
 }
