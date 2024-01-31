@@ -20,6 +20,7 @@ final class NotesListViewController: UITableViewController {
 	
 	// MARK: - Dependencies
 	var presenter: INotesListPresenter?
+	var router: INoteListRouter?
 	
 	// MARK: - Private properties
 	private var viewData = NotesListModel.ViewData(notes: [])
@@ -46,7 +47,7 @@ final class NotesListViewController: UITableViewController {
 private extension NotesListViewController {
 	@objc
 	func addTapped() {
-	//	interactor?.createTask()
+		router?.routeToNoteEditor()
 	}
 }
 

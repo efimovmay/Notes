@@ -28,6 +28,9 @@
 		5B73F5642B6920DA006BFCD6 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5622B6920DA006BFCD6 /* Notes.xcdatamodeld */; };
 		5B73F5672B692221006BFCD6 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5652B692221006BFCD6 /* Note+CoreDataClass.swift */; };
 		5B73F5682B692221006BFCD6 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5662B692221006BFCD6 /* Note+CoreDataProperties.swift */; };
+		5B73F56A2B6A7F98006BFCD6 /* NoteListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5692B6A7F98006BFCD6 /* NoteListRouter.swift */; };
+		5B73F56C2B6A8198006BFCD6 /* NoteEditorAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F56B2B6A8198006BFCD6 /* NoteEditorAssembler.swift */; };
+		5B73F56E2B6A8332006BFCD6 /* NoteListAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F56D2B6A8332006BFCD6 /* NoteListAssembler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		5B73F5632B6920DA006BFCD6 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 		5B73F5652B692221006BFCD6 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5B73F5662B692221006BFCD6 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5B73F5692B6A7F98006BFCD6 /* NoteListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRouter.swift; sourceTree = "<group>"; };
+		5B73F56B2B6A8198006BFCD6 /* NoteEditorAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorAssembler.swift; sourceTree = "<group>"; };
+		5B73F56D2B6A8332006BFCD6 /* NoteListAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListAssembler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,9 +158,11 @@
 		5B73F5472B67E22E006BFCD6 /* NotesList */ = {
 			isa = PBXGroup;
 			children = (
+				5B73F5692B6A7F98006BFCD6 /* NoteListRouter.swift */,
 				5B73F51E2B67D264006BFCD6 /* NotesListViewController.swift */,
 				5B73F54D2B67E552006BFCD6 /* NotesListPresenter.swift */,
 				5B73F54F2B67E878006BFCD6 /* NotesListModel.swift */,
+				5B73F56D2B6A8332006BFCD6 /* NoteListAssembler.swift */,
 			);
 			path = NotesList;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 				5B73F5512B67FFB7006BFCD6 /*  NoteEditorViewController.swift */,
 				5B73F5532B67FFC8006BFCD6 /*  NoteEditorModel.swift */,
 				5B73F5552B67FFD5006BFCD6 /*  NoteEditorPresenter.swift */,
+				5B73F56B2B6A8198006BFCD6 /* NoteEditorAssembler.swift */,
 			);
 			path = " NoteEditor";
 			sourceTree = "<group>";
@@ -279,8 +288,11 @@
 				5B73F5412B67DDAD006BFCD6 /* Strings+L10n.swift in Sources */,
 				5B73F5672B692221006BFCD6 /* Note+CoreDataClass.swift in Sources */,
 				5B73F5502B67E878006BFCD6 /* NotesListModel.swift in Sources */,
+				5B73F56C2B6A8198006BFCD6 /* NoteEditorAssembler.swift in Sources */,
+				5B73F56E2B6A8332006BFCD6 /* NoteListAssembler.swift in Sources */,
 				5B73F54A2B67E30D006BFCD6 /* UIColor+Dynamic.swift in Sources */,
 				5B73F51D2B67D264006BFCD6 /* SceneDelegate.swift in Sources */,
+				5B73F56A2B6A7F98006BFCD6 /* NoteListRouter.swift in Sources */,
 				5B73F5682B692221006BFCD6 /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,6 +16,14 @@ protocol INoteEditorPresenter: AnyObject {
 
 /// Презентер для главного экрана
 class NoteEditorPresenter: INoteEditorPresenter {
+	
+	weak var view: INoteEditorViewController! // swiftlint:disable:this implicitly_unwrapped_optional
+	let coreDataManager: ICoreDataManager
+	
+	required init(view: INoteEditorViewController, coreDataManager: ICoreDataManager) {
+		self.view = view
+		self.coreDataManager = coreDataManager
+	}
 	func viewIsReady() {
 	}
 }
