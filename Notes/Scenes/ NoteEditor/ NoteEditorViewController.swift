@@ -40,8 +40,8 @@ final class NoteEditorViewController: UITableViewController {
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		layout()
-		presenter?.viewIsReady()
 	}
+	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		if noteTextView.text.trim() != "" {
@@ -65,10 +65,10 @@ final class NoteEditorViewController: UITableViewController {
 			noteTextView.contentInset = UIEdgeInsets.zero
 		} else {
 			noteTextView.contentInset = UIEdgeInsets(
-				top: 0,
-				left: 0,
+				top: Sizes.Padding.normal,
+				left: Sizes.Padding.normal,
 				bottom: keyboardViewEndFrame.height,
-				right: 0
+				right: Sizes.Padding.normal
 			)
 			noteTextView.scrollIndicatorInsets = noteTextView.contentInset
 		}
@@ -80,14 +80,15 @@ final class NoteEditorViewController: UITableViewController {
 private extension NoteEditorViewController {
 	
 	func makeNoteTextView() -> UITextView {
-		let textView = UITextView(frame: CGRect(
-			x: Sizes.Padding.normal,
-			y: Sizes.Padding.normal,
-			width: 300,
-			height: 300
-		))
-		textView.backgroundColor = .gray
-		textView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+		let textView = UITextView(frame: .zero, textContainer: nil)
+
+		textView.backgroundColor = Theme.backgroundColor
+		textView.contentInset = UIEdgeInsets(
+			top: Sizes.Padding.normal,
+			left: Sizes.Padding.normal,
+			bottom: Sizes.Padding.normal,
+			right: Sizes.Padding.normal
+		)
 		textView.isScrollEnabled = true
 		textView.font = UIFont.systemFont(ofSize: Sizes.fontSizeEditor)
 		
@@ -121,6 +122,16 @@ extension NoteEditorViewController: UITextViewDelegate {
 private extension NoteEditorViewController {
 	func layout() {
 		view.addSubview(noteTextView)
+		
+		noteTextView.translatesAutoresizingMaskIntoConstraints = false
+		
+		let safeArea = view.safeAreaLayoutGuide
+		NSLayoutConstraint.activate([
+			noteTextView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+			noteTextView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+			noteTextView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+			noteTextView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+		])
 	}
 }
 

@@ -23,7 +23,7 @@ enum Colors {
 }
 
 enum Theme {
-	static let mainColor = Colors.white
+	static let backgroundColor = Colors.white
 	static let navBarColor = Colors.blue
 	static let navBarTextColor = Colors.white
 }

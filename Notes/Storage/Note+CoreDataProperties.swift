@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 extension Note {
-	
 	/// Модель note в CoreData
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<Note> {
 		return NSFetchRequest<Note>(entityName: "Note")
@@ -21,5 +20,4 @@ extension Note {
 	@NSManaged public var text: String?
 }
 
-extension Note: Identifiable {
-}
+extension Note: Identifiable {}

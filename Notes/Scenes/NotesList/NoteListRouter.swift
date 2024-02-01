@@ -9,7 +9,6 @@ import UIKit
 
 protocol INoteListRouter {
 	func routeToNoteEditor(note: Note?)
-	func backToNoteList()
 }
  
 final class NoteListRouter: INoteListRouter {
@@ -28,9 +27,5 @@ final class NoteListRouter: INoteListRouter {
 	func routeToNoteEditor(note: Note?) {
 		let noteEditorViewController = NoteEditorAssembler(coreDataManager: coreDataManager, note: note).assembly()
 		navigationController.pushViewController(noteEditorViewController, animated: true)
-	}
-	
-	func backToNoteList() {
-		navigationController.popViewController(animated: true)
 	}
 }

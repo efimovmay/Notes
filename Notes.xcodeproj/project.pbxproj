@@ -152,8 +152,8 @@
 			children = (
 				5B73F5652B692221006BFCD6 /* Note+CoreDataClass.swift */,
 				5B73F5662B692221006BFCD6 /* Note+CoreDataProperties.swift */,
-				5B73F5622B6920DA006BFCD6 /* Notes.xcdatamodeld */,
 				5B73F5602B690F2C006BFCD6 /* CoreDataManager.swift */,
+				5B73F5622B6920DA006BFCD6 /* Notes.xcdatamodeld */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
