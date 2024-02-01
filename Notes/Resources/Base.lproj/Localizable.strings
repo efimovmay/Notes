@@ -1,0 +1,13 @@
+//
+//  MdEditor.Localizable (en)
+//
+
+// MARK: - Common strings
+"Yes.text" = "Yes";
+"No.text" = "No";
+"Return.text" = "Return";
+"Ok.text" = "Ok";
+"Error.text" = "Error";
+
+// MARK: - NoteList strings
+"NoteList.title" = "Notes";
