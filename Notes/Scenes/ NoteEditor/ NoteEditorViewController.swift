@@ -24,7 +24,7 @@ final class NoteEditorViewController: UITableViewController {
 	var presenter: INoteEditorPresenter?
 	
 	// MARK: - Private properties
-	private lazy var noteTextView = makeNoteTextView()
+	private lazy var noteTextView: UITextView = makeNoteTextView()
 
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -37,6 +37,17 @@ final class NoteEditorViewController: UITableViewController {
 		layout()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.navigationBar.prefersLargeTitles = false
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		noteTextView.becomeFirstResponder()
+	}
+	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.noteTextView.resignFirstResponder()
 	}
@@ -44,42 +55,57 @@ final class NoteEditorViewController: UITableViewController {
 
 // MARK: - Setup UI
 private extension NoteEditorViewController {
+	
 	func makeNoteTextView() -> UITextView {
-		let textView = UITextView(frame: self.view.bounds)
+		let textView = UITextView(frame: CGRect(
+			x: Sizes.Padding.normal,
+			y: Sizes.Padding.normal,
+			width: self.view.bounds.width - (Sizes.Padding.normal * 2),
+			height: self.view.bounds.height - (Sizes.Padding.normal * 4)
+		))
+		
+		textView.isScrollEnabled = true
+		textView.font = UIFont.systemFont(ofSize: Sizes.fontSizeEditor)
+		
 		return textView
 	}
 	
 	func setupUI() {
+
 		
-		NotificationCenter.default.addObserver(
+		let notificationCenter = NotificationCenter.default
+		notificationCenter.addObserver(
 			self,
 			selector: #selector(updateTextView),
-			name: UIResponder.keyboardDidShowNotification,
+			name: UIResponder.keyboardDidHideNotification,
 			object: nil
 		)
-		NotificationCenter.default.addObserver(
+		notificationCenter.addObserver(
 			self,
 			selector: #selector(updateTextView),
-			name: UIResponder.keyboardWillHideNotification,
+			name: UIResponder.keyboardDidHideNotification,
 			object: nil
 		)
 	}
 	
-	@objc 
-	func updateTextView(param: Notification) {
-		let userInfo = param.userInfo
+	@objc
+	func updateTextView(notification: Notification) {
 		// swiftlint:disable all
-		let getKeyBoardrect = (userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+		let userInfo = notification.userInfo!
+		let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 		// swiftlint:enable all
-		let keyboardFrame = self.view.convert(getKeyBoardrect, to: view.window)
+		let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: noteTextView.window)
 		
-		if param.name == UIResponder.keyboardDidShowNotification {
+		if notification.name == UIResponder.keyboardWillHideNotification {
 			noteTextView.contentInset = UIEdgeInsets.zero
 		} else {
-			noteTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height, right: 0)
-			noteTextView.scrollIndicatorInsets = noteTextView.contentInset
+			noteTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
 		}
-		noteTextView.scrollRangeToVisible(noteTextView.selectedRange)
+		
+		noteTextView.scrollIndicatorInsets = noteTextView.contentInset
+		
+		let selectedRange = noteTextView.selectedRange
+		noteTextView.scrollRangeToVisible(selectedRange)
 	}
 }
 

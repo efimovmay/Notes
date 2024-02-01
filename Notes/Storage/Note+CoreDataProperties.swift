@@ -17,11 +17,11 @@ extension Note {
 	}
 	
 	/// Идентификатор
-	@NSManaged public var id: UUID! // swiftlint:disable:this implicitly_unwrapped_optional
+	@NSManaged public var id: UUID? // swiftlint:disable:this implicitly_unwrapped_optional
 	/// Тело заметки
-	@NSManaged public var text: String! // swiftlint:disable:this implicitly_unwrapped_optional
+	@NSManaged public var text: String? // swiftlint:disable:this implicitly_unwrapped_optional
 	/// Дата последнего обновления
-	@NSManaged public var lastUpdated: Date! // swiftlint:disable:this implicitly_unwrapped_optional
+	@NSManaged public var lastUpdated: Date? // swiftlint:disable:this implicitly_unwrapped_optional
 }
 
 extension Note: Identifiable {

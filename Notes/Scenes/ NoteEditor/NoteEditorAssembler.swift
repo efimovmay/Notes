@@ -20,7 +20,7 @@ final class NoteEditorAssembler {
 	// MARK: - Public methods
 	func assembly() -> NoteEditorViewController {
 		let viewController = NoteEditorViewController()
-		let presenter = NoteEditorPresenter(view: viewController, coreDataManager: coreDataManager)
+		let presenter = NoteEditorPresenter(view: viewController, coreDataManager: coreDataManager, note: nil)
 		viewController.presenter = presenter
 		
 		return viewController

@@ -40,6 +40,11 @@ final class NotesListViewController: UITableViewController {
 		setupUI()
 		presenter?.viewIsReady()
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.navigationBar.prefersLargeTitles = true
+	}
 }
 
 // MARK: - Actions
@@ -52,7 +57,6 @@ private extension NotesListViewController {
 }
 
 // MARK: - UITableView
-
 extension NotesListViewController {
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		viewData.notes.count
@@ -71,24 +75,34 @@ extension NotesListViewController {
 		forRowAt indexPath: IndexPath
 	) {
 		if editingStyle == .delete {
-			tableView.deleteRows(at: [indexPath], with: .automatic)
 			let note = getNoteForIndex(indexPath)
 			presenter?.deleteNote(note: note)
 		}
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let note = getNoteForIndex(indexPath)
+		router?.routeToNoteEditor()
 	}
 }
 
 // MARK: - UI setup
 private extension NotesListViewController {
-	private func setupUI() {
+	func setupUI() {
+		setupNavBar()
+
+		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+	}
+	
+	func setupNavBar() {
 		title = L10n.NoteList.title
-		navigationController?.navigationBar.prefersLargeTitles = true
 		
 		let navBarAppearance = UINavigationBarAppearance()
-		navBarAppearance.titleTextAttributes = [.foregroundColor: Theme.mainColor]
-		navBarAppearance.largeTitleTextAttributes = [.foregroundColor: Theme.mainColor]
+		navBarAppearance.titleTextAttributes = [.foregroundColor: Theme.navBarTextColor]
+		navBarAppearance.largeTitleTextAttributes = [.foregroundColor: Theme.navBarTextColor]
 		navBarAppearance.backgroundColor = Theme.navBarColor
 		
+		navigationController?.navigationBar.tintColor = Theme.navBarTextColor
 		navigationController?.navigationBar.standardAppearance = navBarAppearance
 		navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
 		
@@ -97,8 +111,6 @@ private extension NotesListViewController {
 			target: self,
 			action: #selector(addTapped)
 		)
-		
-		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 	}
 	
 	func getNoteForIndex(_ indexPath: IndexPath) -> Note {
@@ -107,8 +119,10 @@ private extension NotesListViewController {
 	
 	func configureCell(_ cell: UITableViewCell, with note: Note) {
 		var contentConfiguration = cell.defaultContentConfiguration()
-
+		
 		contentConfiguration.text = note.title
+		contentConfiguration.secondaryText = Date().format()
+		
 		cell.contentConfiguration = contentConfiguration
 	}
 }

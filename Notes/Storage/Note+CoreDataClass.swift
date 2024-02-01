@@ -12,12 +12,12 @@ import CoreData
 public class Note: NSManagedObject {
 	
 	var title: String {
-		return text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).first ?? ""
+		return text?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).first ?? ""
 	}
 	
-	var desc: String {
-		var lines = text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-		lines.removeFirst()
-		return "\(lastUpdated.format()) \(lines.first ?? "")" // return second line
-	}
+//	var desc: String {
+//		var lines = text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+//		lines.removeFirst()
+//		return "\(lastUpdated.format()) \(lines.first ?? "")" // return second line
+//	}
 }

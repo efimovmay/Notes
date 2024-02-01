@@ -19,11 +19,14 @@ class NoteEditorPresenter: INoteEditorPresenter {
 	
 	weak var view: INoteEditorViewController! // swiftlint:disable:this implicitly_unwrapped_optional
 	let coreDataManager: ICoreDataManager
+	var note: Note?
 	
-	required init(view: INoteEditorViewController, coreDataManager: ICoreDataManager) {
+	required init(view: INoteEditorViewController, coreDataManager: ICoreDataManager, note: Note?) {
 		self.view = view
 		self.coreDataManager = coreDataManager
+		self.note = note
 	}
+	
 	func viewIsReady() {
 	}
 }
