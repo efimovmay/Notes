@@ -17,11 +17,10 @@ protocol INoteEditorViewController: AnyObject {
 
 /// Экран редактирования заметки.
 final class NoteEditorViewController: UITableViewController {
-	// MARK: - Private properties
-	private var viewData = NoteEditorModel.ViewData(text: "")
 	
 	// MARK: - Dependencies
 	var presenter: INoteEditorPresenter?
+	var note: Note?
 	
 	// MARK: - Private properties
 	private lazy var noteTextView: UITextView = makeNoteTextView()
@@ -30,26 +29,48 @@ final class NoteEditorViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
+		presenter?.viewIsReady()
 	}
-	
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-		layout()
-	}
-	
+
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.navigationBar.prefersLargeTitles = false
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		noteTextView.becomeFirstResponder()
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+		layout()
+		presenter?.viewIsReady()
+	}
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		presenter?.saveNote(text: noteTextView.text)
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.noteTextView.resignFirstResponder()
+	}
+	
+	@objc
+	func updateTextView(notification: Notification) {
+		// swiftlint:disable all
+		let userInfo = notification.userInfo
+		let keyboardScreenEndFrame = (userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+		// swiftlint:enable all
+		let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, to: view.window)
+		
+		if notification.name == UIResponder.keyboardWillHideNotification {
+			noteTextView.contentInset = UIEdgeInsets.zero
+		} else {
+			noteTextView.contentInset = UIEdgeInsets(
+				top: 0,
+				left: 0,
+				bottom: keyboardViewEndFrame.height,
+				right: 0
+			)
+			noteTextView.scrollIndicatorInsets = noteTextView.contentInset
+		}
+		noteTextView.scrollRangeToVisible(noteTextView.selectedRange)
 	}
 }
 
@@ -60,10 +81,11 @@ private extension NoteEditorViewController {
 		let textView = UITextView(frame: CGRect(
 			x: Sizes.Padding.normal,
 			y: Sizes.Padding.normal,
-			width: self.view.bounds.width - (Sizes.Padding.normal * 2),
-			height: self.view.bounds.height - (Sizes.Padding.normal * 4)
+			width: 300,
+			height: 300
 		))
-		
+		textView.backgroundColor = .gray
+		textView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 		textView.isScrollEnabled = true
 		textView.font = UIFont.systemFont(ofSize: Sizes.fontSizeEditor)
 		
@@ -71,41 +93,25 @@ private extension NoteEditorViewController {
 	}
 	
 	func setupUI() {
-
-		
-		let notificationCenter = NotificationCenter.default
-		notificationCenter.addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(updateTextView),
 			name: UIResponder.keyboardDidHideNotification,
 			object: nil
 		)
-		notificationCenter.addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(updateTextView),
-			name: UIResponder.keyboardDidHideNotification,
+			name: UIResponder.keyboardWillShowNotification,
 			object: nil
 		)
 	}
-	
-	@objc
-	func updateTextView(notification: Notification) {
-		// swiftlint:disable all
-		let userInfo = notification.userInfo!
-		let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-		// swiftlint:enable all
-		let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: noteTextView.window)
-		
-		if notification.name == UIResponder.keyboardWillHideNotification {
-			noteTextView.contentInset = UIEdgeInsets.zero
-		} else {
-			noteTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
-		}
-		
-		noteTextView.scrollIndicatorInsets = noteTextView.contentInset
-		
-		let selectedRange = noteTextView.selectedRange
-		noteTextView.scrollRangeToVisible(selectedRange)
+}
+
+// MARK: - Text View Delegate
+extension NoteEditorViewController: UITextViewDelegate {
+	func textViewDidEndEditing(_ textView: UITextView) {
+		presenter?.saveNote(text: noteTextView.text)
 	}
 }
 
@@ -119,7 +125,6 @@ private extension NoteEditorViewController {
 // MARK: - IMainViewController
 extension NoteEditorViewController: INoteEditorViewController {
 	func render(viewData: NoteEditorModel.ViewData) {
-		self.viewData = viewData
-		tableView.reloadData()
+		self.noteTextView.text = viewData.text
 	}
 }

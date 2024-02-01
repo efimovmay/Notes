@@ -8,7 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+	
 	var window: UIWindow?
 	private let coreDataManager = CoreDataManager()
 	
@@ -32,11 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	func assembly(navigationController: UINavigationController) -> UIViewController {
 		let notesListViewController = NoteListAssembler(coreDataManager: coreDataManager).assembly()
 		
-		let noteEditorViewController = NoteEditorAssembler(coreDataManager: coreDataManager).assembly()
-		
 		let noteListRouter = NoteListRouter(
 			navigationController: navigationController,
-			nextViewController: noteEditorViewController
+			coreDataManager: coreDataManager
 		)
 		notesListViewController.router = noteListRouter
 		

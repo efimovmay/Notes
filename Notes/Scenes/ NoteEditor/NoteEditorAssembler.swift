@@ -11,16 +11,18 @@ final class NoteEditorAssembler {
 	
 	// MARK: - Dependencies
 	private let coreDataManager: ICoreDataManager
+	private let note: Note?
 	
 	// MARK: - Initialization
-	init(coreDataManager: ICoreDataManager) {
+	init(coreDataManager: ICoreDataManager, note: Note?) {
 		self.coreDataManager = coreDataManager
+		self.note = note
 	}
 	
 	// MARK: - Public methods
 	func assembly() -> NoteEditorViewController {
 		let viewController = NoteEditorViewController()
-		let presenter = NoteEditorPresenter(view: viewController, coreDataManager: coreDataManager, note: nil)
+		let presenter = NoteEditorPresenter(view: viewController, coreDataManager: coreDataManager, note: note)
 		viewController.presenter = presenter
 		
 		return viewController

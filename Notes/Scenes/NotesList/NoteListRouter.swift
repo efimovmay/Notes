@@ -8,7 +8,7 @@
 import UIKit
 
 protocol INoteListRouter {
-	func routeToNoteEditor()
+	func routeToNoteEditor(note: Note?)
 	func backToNoteList()
 }
  
@@ -16,17 +16,18 @@ final class NoteListRouter: INoteListRouter {
 	// MARK: - Dependencies
 	
 	private let navigationController: UINavigationController
-	private let nextViewController: UIViewController
+	private let coreDataManager: ICoreDataManager
 	
 	// MARK: - Initialization
-	init(navigationController: UINavigationController, nextViewController: UIViewController) {
+	init(navigationController: UINavigationController, coreDataManager: ICoreDataManager) {
 		self.navigationController = navigationController
-		self.nextViewController = nextViewController
+		self.coreDataManager = coreDataManager
 	}
 	
 	// MARK: - Public methods
-	func routeToNoteEditor() {
-		navigationController.pushViewController(nextViewController, animated: true)
+	func routeToNoteEditor(note: Note?) {
+		let noteEditorViewController = NoteEditorAssembler(coreDataManager: coreDataManager, note: note).assembly()
+		navigationController.pushViewController(noteEditorViewController, animated: true)
 	}
 	
 	func backToNoteList() {

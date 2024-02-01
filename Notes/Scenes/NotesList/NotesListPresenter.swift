@@ -17,11 +17,11 @@ protocol INotesListPresenter: AnyObject {
 }
 
 /// Презентер для главного экрана
-class NotesListPresenter: INotesListPresenter {
+final class NotesListPresenter: INotesListPresenter {
 	
 	weak var view: INotesListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
 	let coreDataManager: ICoreDataManager
-	var notes: [Note] = []
+	private var notes: [Note] = []
 
 	required init(view: INotesListViewController, coreDataManager: ICoreDataManager) {
 		self.view = view
@@ -41,7 +41,7 @@ class NotesListPresenter: INotesListPresenter {
 			case .success(let notes):
 				self.notes = notes
 			case .failure(let error):
-				print(error.localizedDescription)
+				print(error.localizedDescription) // swiftlint:disable:this print_using
 			}
 		}
 	
@@ -50,5 +50,18 @@ class NotesListPresenter: INotesListPresenter {
 	
 	func deleteNote(note: Note) {
 		coreDataManager.deleteNote(note)
+	}
+	
+	func checkNotes() {
+		coreDataManager.fetchData { [unowned self] result in
+			switch result {
+			case .success(let notes):
+				if notes.isEmpty {
+					coreDataManager.create("Новая заметка")
+				}
+			case .failure(let error):
+				print(error.localizedDescription)
+			}
+		}
 	}
 }

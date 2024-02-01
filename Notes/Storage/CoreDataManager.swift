@@ -16,9 +16,7 @@ protocol ICoreDataManager {
 	func saveContext()
 }
 
-class CoreDataManager: ICoreDataManager {
-	
-//	static let shared = CoreDataManager()
+final class CoreDataManager: ICoreDataManager {
 	
 	// MARK: - Core Data stack
 	private let persistentContainer: NSPersistentContainer = {
@@ -41,7 +39,9 @@ class CoreDataManager: ICoreDataManager {
 	
 	func create(_ text: String) {
 		let note = Note(context: viewContext)
+		note.id = UUID()
 		note.text = text
+		note.lastUpdated = Date()
 		saveContext()
 	}
 	
@@ -51,7 +51,7 @@ class CoreDataManager: ICoreDataManager {
 		do {
 			let tasks = try viewContext.fetch(fetchRequest)
 			completion(.success(tasks))
-		} catch let error {
+		} catch let error { // swiftlint:disable:this untyped_error_in_catch
 			completion(.failure(error))
 		}
 	}

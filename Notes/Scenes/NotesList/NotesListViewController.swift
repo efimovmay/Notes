@@ -23,7 +23,7 @@ final class NotesListViewController: UITableViewController {
 	var router: INoteListRouter?
 	
 	// MARK: - Private properties
-	private var viewData = NotesListModel.ViewData(notes: [])
+	private var notes: [Note] = []
 
 	// MARK: - Initialization
 	init() {
@@ -48,23 +48,22 @@ final class NotesListViewController: UITableViewController {
 }
 
 // MARK: - Actions
-
 private extension NotesListViewController {
 	@objc
 	func addTapped() {
-		router?.routeToNoteEditor()
+		router?.routeToNoteEditor(note: nil)
 	}
 }
 
 // MARK: - UITableView
 extension NotesListViewController {
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		viewData.notes.count
+		notes.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let task = viewData.notes[indexPath.row]
+		let task = notes[indexPath.row]
 		configureCell(cell, with: task)
 		return cell
 	}
@@ -77,12 +76,14 @@ extension NotesListViewController {
 		if editingStyle == .delete {
 			let note = getNoteForIndex(indexPath)
 			presenter?.deleteNote(note: note)
+			notes.remove(at: indexPath.row)
+			tableView.deleteRows(at: [indexPath], with: .automatic)
 		}
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let note = getNoteForIndex(indexPath)
-		router?.routeToNoteEditor()
+		router?.routeToNoteEditor(note: note)
 	}
 }
 
@@ -90,7 +91,6 @@ extension NotesListViewController {
 private extension NotesListViewController {
 	func setupUI() {
 		setupNavBar()
-
 		self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 	}
 	
@@ -114,7 +114,7 @@ private extension NotesListViewController {
 	}
 	
 	func getNoteForIndex(_ indexPath: IndexPath) -> Note {
-		viewData.notes[indexPath.row]
+		notes[indexPath.row]
 	}
 	
 	func configureCell(_ cell: UITableViewCell, with note: Note) {
@@ -130,7 +130,7 @@ private extension NotesListViewController {
 extension NotesListViewController: INotesListViewController {
 
 	func render(viewData: NotesListModel.ViewData) {
-		self.viewData = viewData
+		self.notes = viewData.notes
 		tableView.reloadData()
 	}
 }

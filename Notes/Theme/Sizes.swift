@@ -7,7 +7,6 @@
 
 import Foundation
 
-// swiftlint:disable type_name
 enum Sizes {
 	
 	static let fontSizeEditor: CGFloat = 20
@@ -16,6 +15,6 @@ enum Sizes {
 		static let half: CGFloat = 8
 		static let normal: CGFloat = 16
 		static let double: CGFloat = 32
+		static let bottonTextView: CGFloat = 150
 	}
 }
-// swiftlint:enable type_name
