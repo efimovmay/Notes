@@ -44,7 +44,9 @@ final class NoteEditorViewController: UITableViewController {
 	}
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		presenter?.saveNote(text: noteTextView.text)
+		if noteTextView.text.trim() != "" {
+			presenter?.saveNote(text: noteTextView.text)
+		}
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -42,7 +42,7 @@ class NoteEditorPresenter: INoteEditorPresenter {
 		if let updatedNote = note {
 			updatedNote.text = text
 			coreDataManager.update(updatedNote, newText: text)
-		} else if note?.text != "" {
+		} else {
 			coreDataManager.create(text)
 		}
 	}
