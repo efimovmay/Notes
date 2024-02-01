@@ -16,11 +16,9 @@ extension Note {
 		return NSFetchRequest<Note>(entityName: "Note")
 	}
 	/// Идентификатор
-	@NSManaged public var id: UUID
+	@NSManaged public var id: UUID?
 	/// Тело заметки
-	@NSManaged public var text: String
-	/// Дата последнего обновления
-	@NSManaged public var lastUpdated: Date
+	@NSManaged public var text: String?
 }
 
 extension Note: Identifiable {

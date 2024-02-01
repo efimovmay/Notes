@@ -36,12 +36,10 @@ final class CoreDataManager: ICoreDataManager {
 	}
 	
 	// MARK: - CRUD
-	
 	func create(_ text: String) {
 		let note = Note(context: viewContext)
 		note.id = UUID()
 		note.text = text
-		note.lastUpdated = Date()
 		saveContext()
 	}
 	
@@ -58,7 +56,6 @@ final class CoreDataManager: ICoreDataManager {
 	
 	func update(_ note: Note, newText: String) {
 		note.text = newText
-		note.lastUpdated = Date()
 		saveContext()
 	}
 	

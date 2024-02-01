@@ -32,9 +32,9 @@ class NoteEditorPresenter: INoteEditorPresenter {
 	
 	func viewIsReady() {
 		if let newNote = note {
-			view.render(viewData: NoteEditorModel.ViewData(text: newNote.text))
+			view.render(viewData: NoteEditorModel.ViewData(text: newNote.text ?? ""))
 		} else {
-			view.render(viewData: NoteEditorModel.ViewData(text: "ddddddddd"))
+			view.render(viewData: NoteEditorModel.ViewData(text: ""))
 		}
 	}
 	
@@ -42,7 +42,7 @@ class NoteEditorPresenter: INoteEditorPresenter {
 		if let updatedNote = note {
 			updatedNote.text = text
 			coreDataManager.update(updatedNote, newText: text)
-		} else {
+		} else if note?.text != "" {
 			coreDataManager.create(text)
 		}
 	}

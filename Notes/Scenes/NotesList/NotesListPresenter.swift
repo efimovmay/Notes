@@ -51,17 +51,4 @@ final class NotesListPresenter: INotesListPresenter {
 	func deleteNote(note: Note) {
 		coreDataManager.deleteNote(note)
 	}
-	
-	func checkNotes() {
-		coreDataManager.fetchData { [unowned self] result in
-			switch result {
-			case .success(let notes):
-				if notes.isEmpty {
-					coreDataManager.create("Новая заметка")
-				}
-			case .failure(let error):
-				print(error.localizedDescription)
-			}
-		}
-	}
 }

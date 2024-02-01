@@ -20,6 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		let window = UIWindow(windowScene: scene)
 		
+		checkNotes()
+		
 		let navigationController = UINavigationController()
 		navigationController.pushViewController(assembly(navigationController: navigationController), animated: false)
 		
@@ -39,5 +41,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		notesListViewController.router = noteListRouter
 		
 		return notesListViewController
+	}
+	
+	func checkNotes() {
+		coreDataManager.fetchData { [unowned self] result in
+			switch result {
+			case .success(let notes):
+				if notes.isEmpty {
+					coreDataManager.create("Новая заметка")
+				}
+			case .failure(let error):
+				print(error.localizedDescription) // swiftlint:disable:this print_using
+			}
+		}
 	}
 }

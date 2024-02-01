@@ -38,12 +38,12 @@ final class NotesListViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
-		presenter?.viewIsReady()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.navigationBar.prefersLargeTitles = true
+		presenter?.viewIsReady()
 	}
 }
 
@@ -121,7 +121,6 @@ private extension NotesListViewController {
 		var contentConfiguration = cell.defaultContentConfiguration()
 		
 		contentConfiguration.text = note.title
-		contentConfiguration.secondaryText = Date().format()
 		
 		cell.contentConfiguration = contentConfiguration
 	}

@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 public class Note: NSManagedObject {
-	
 	var title: String {
-		return text.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).first ?? ""
+		// возвращает первую строку текста
+		return text?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).first ?? ""
 	}
 }
