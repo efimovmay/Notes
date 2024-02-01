@@ -24,7 +24,6 @@
 		5B73F5522B67FFB7006BFCD6 /*  NoteEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5512B67FFB7006BFCD6 /*  NoteEditorViewController.swift */; };
 		5B73F5542B67FFC8006BFCD6 /*  NoteEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5532B67FFC8006BFCD6 /*  NoteEditorModel.swift */; };
 		5B73F5562B67FFD5006BFCD6 /*  NoteEditorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5552B67FFD5006BFCD6 /*  NoteEditorPresenter.swift */; };
-		5B73F55F2B690D7C006BFCD6 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F55E2B690D7C006BFCD6 /* Date+Extension.swift */; };
 		5B73F5612B690F2C006BFCD6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5602B690F2C006BFCD6 /* CoreDataManager.swift */; };
 		5B73F5642B6920DA006BFCD6 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5622B6920DA006BFCD6 /* Notes.xcdatamodeld */; };
 		5B73F5672B692221006BFCD6 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B73F5652B692221006BFCD6 /* Note+CoreDataClass.swift */; };
@@ -55,7 +54,6 @@
 		5B73F5512B67FFB7006BFCD6 /*  NoteEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " NoteEditorViewController.swift"; sourceTree = "<group>"; };
 		5B73F5532B67FFC8006BFCD6 /*  NoteEditorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " NoteEditorModel.swift"; sourceTree = "<group>"; };
 		5B73F5552B67FFD5006BFCD6 /*  NoteEditorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " NoteEditorPresenter.swift"; sourceTree = "<group>"; };
-		5B73F55E2B690D7C006BFCD6 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		5B73F5602B690F2C006BFCD6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5B73F5632B6920DA006BFCD6 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 		5B73F5652B692221006BFCD6 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				5B73F5402B67DDAD006BFCD6 /* Strings+L10n.swift */,
 				5B73F5492B67E30D006BFCD6 /* UIColor+Dynamic.swift */,
 				5B73F54B2B67E33D006BFCD6 /* UIColor+Hex.swift */,
-				5B73F55E2B690D7C006BFCD6 /* Date+Extension.swift */,
 				5B628E252B6C00B500F1C701 /* Strings+trim.swift */,
 			);
 			path = Extensions;
@@ -283,7 +280,6 @@
 				5B73F5522B67FFB7006BFCD6 /*  NoteEditorViewController.swift in Sources */,
 				5B73F5612B690F2C006BFCD6 /* CoreDataManager.swift in Sources */,
 				5B73F51F2B67D264006BFCD6 /* NotesListViewController.swift in Sources */,
-				5B73F55F2B690D7C006BFCD6 /* Date+Extension.swift in Sources */,
 				5B73F5642B6920DA006BFCD6 /* Notes.xcdatamodeld in Sources */,
 				5B73F5542B67FFC8006BFCD6 /*  NoteEditorModel.swift in Sources */,
 				5B73F51B2B67D264006BFCD6 /* AppDelegate.swift in Sources */,

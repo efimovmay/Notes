@@ -48,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			switch result {
 			case .success(let notes):
 				if notes.isEmpty {
-					coreDataManager.create("Новая заметка")
+					coreDataManager.create("Первая заметка")
 				}
 			case .failure(let error):
 				print(error.localizedDescription) // swiftlint:disable:this print_using

@@ -18,7 +18,7 @@ protocol INoteEditorPresenter: AnyObject {
 }
 
 /// Презентер для окна редактирования
-class NoteEditorPresenter: INoteEditorPresenter {
+final class NoteEditorPresenter: INoteEditorPresenter {
 	
 	weak var view: INoteEditorViewController! // swiftlint:disable:this implicitly_unwrapped_optional
 	private let coreDataManager: ICoreDataManager

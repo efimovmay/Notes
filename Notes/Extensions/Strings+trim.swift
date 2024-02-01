@@ -8,6 +8,7 @@
 import Foundation
 
 extension String {
+	/// Удаляет пробелы из строки
 	func trim() -> String {
 		return self.trimmingCharacters(in: NSCharacterSet.whitespaces)
 	}

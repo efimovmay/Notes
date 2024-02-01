@@ -12,7 +12,7 @@ protocol INotesListPresenter: AnyObject {
 
 	/// Экран готов для отображения информации.
 	func viewIsReady()
-	
+	/// Удаление заметки.
 	func deleteNote(note: Note)
 }
 
@@ -20,7 +20,7 @@ protocol INotesListPresenter: AnyObject {
 final class NotesListPresenter: INotesListPresenter {
 	
 	weak var view: INotesListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
-	let coreDataManager: ICoreDataManager
+	private let coreDataManager: ICoreDataManager
 	private var notes: [Note] = []
 
 	required init(view: INotesListViewController, coreDataManager: ICoreDataManager) {
@@ -28,13 +28,10 @@ final class NotesListPresenter: INotesListPresenter {
 		self.coreDataManager = coreDataManager
 	}
 	
-	/// Обработка готовности экрана для отображения информации.
 	func viewIsReady() {
 		view.render(viewData: mapViewData())
 	}
 	
-	/// Мапинг бизнес-моделей в модель для отображения.
-	/// - Returns: Возвращает модель для отображения.
 	private func mapViewData() -> NotesListModel.ViewData {
 		coreDataManager.fetchData { [unowned self] result in
 			switch result {
