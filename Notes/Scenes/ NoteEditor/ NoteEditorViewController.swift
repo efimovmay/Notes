@@ -24,14 +24,14 @@ final class NoteEditorViewController: UITableViewController {
 	
 	// MARK: - Private properties
 	private lazy var noteTextView: UITextView = makeNoteTextView()
-
+	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
 		presenter?.viewIsReady()
 	}
-
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.navigationBar.prefersLargeTitles = false
@@ -52,7 +52,9 @@ final class NoteEditorViewController: UITableViewController {
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.noteTextView.resignFirstResponder()
 	}
-	
+}
+// MARK: - Action
+private extension NoteEditorViewController {
 	@objc
 	func updateTextView(notification: Notification) {
 		// swiftlint:disable all
@@ -91,6 +93,7 @@ private extension NoteEditorViewController {
 		)
 		textView.isScrollEnabled = true
 		textView.font = UIFont.systemFont(ofSize: Sizes.fontSizeEditor)
+		textView.keyboardDismissMode = .onDrag
 		
 		return textView
 	}
