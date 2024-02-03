@@ -6,4 +6,6 @@
 
 Стэк: UIKit, MVP, CoreData
 
-![Image alt](https://github.com/efimovmay/Notes/blob/main/ScreenRecord.gif)
+<p align="center">
+<img  src="https://github.com/efimovmay/Notes/blob/main/ScreenRecord.gif"  width="350" alt="Calculate-BMI-and-risk-category"/>
+</p>
