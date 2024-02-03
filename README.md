@@ -6,4 +6,4 @@
 
 Стэк: UIKit, MVP, CoreData
 
-![Image alt](https://github.com/efimovmay/Notes/blob/main/ScreenRec.gif)
+![Image alt](https://github.com/efimovmay/Notes/blob/main/ScreenRecord.gif)
