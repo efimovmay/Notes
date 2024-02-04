@@ -18,20 +18,30 @@ protocol INotesListPresenter: AnyObject {
 
 /// Презентер для главного экрана
 final class NotesListPresenter: INotesListPresenter {
-	
-	weak var view: INotesListViewController! // swiftlint:disable:this implicitly_unwrapped_optional
-	private let coreDataManager: ICoreDataManager
-	private var notes: [Note] = []
 
+	// MARK: - Dependencies
+	weak var view: INotesListViewController?
+	private let coreDataManager: ICoreDataManager
+	
+	// MARK: - Private properties
+	private var notes: [Note] = []
+	
+	// MARK: - Initialization
 	required init(view: INotesListViewController, coreDataManager: ICoreDataManager) {
 		self.view = view
 		self.coreDataManager = coreDataManager
 	}
-	
+
+	// MARK: - Public methods
 	func viewIsReady() {
-		view.render(viewData: mapViewData())
+		view?.render(viewData: mapViewData())
 	}
 	
+	func deleteNote(note: Note) {
+		coreDataManager.deleteNote(note)
+	}
+	
+	// MARK: - Private methods
 	private func mapViewData() -> NotesListModel.ViewData {
 		coreDataManager.fetchData { [unowned self] result in
 			switch result {
@@ -43,9 +53,5 @@ final class NotesListPresenter: INotesListPresenter {
 		}
 	
 		return NotesListModel.ViewData(notes: notes)
-	}
-	
-	func deleteNote(note: Note) {
-		coreDataManager.deleteNote(note)
 	}
 }

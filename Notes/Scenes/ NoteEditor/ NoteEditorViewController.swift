@@ -20,7 +20,6 @@ final class NoteEditorViewController: UITableViewController {
 	
 	// MARK: - Dependencies
 	var presenter: INoteEditorPresenter?
-	var note: Note?
 	
 	// MARK: - Private properties
 	private lazy var noteTextView: UITextView = makeNoteTextView()
@@ -67,10 +66,10 @@ private extension NoteEditorViewController {
 			noteTextView.contentInset = UIEdgeInsets.zero
 		} else {
 			noteTextView.contentInset = UIEdgeInsets(
-				top: Sizes.Padding.normal,
-				left: Sizes.Padding.normal,
-				bottom: keyboardViewEndFrame.height,
-				right: Sizes.Padding.normal
+				top: 0,
+				left: 0,
+				bottom: keyboardViewEndFrame.height + Sizes.Padding.double,
+				right: 0
 			)
 			noteTextView.scrollIndicatorInsets = noteTextView.contentInset
 		}
@@ -85,12 +84,6 @@ private extension NoteEditorViewController {
 		let textView = UITextView(frame: .zero, textContainer: nil)
 
 		textView.backgroundColor = Theme.backgroundColor
-		textView.contentInset = UIEdgeInsets(
-			top: Sizes.Padding.normal,
-			left: Sizes.Padding.normal,
-			bottom: Sizes.Padding.normal,
-			right: Sizes.Padding.normal
-		)
 		textView.isScrollEnabled = true
 		textView.font = UIFont.systemFont(ofSize: Sizes.fontSizeEditor)
 		textView.keyboardDismissMode = .onDrag
@@ -130,10 +123,10 @@ private extension NoteEditorViewController {
 		
 		let safeArea = view.safeAreaLayoutGuide
 		NSLayoutConstraint.activate([
-			noteTextView.topAnchor.constraint(equalTo: safeArea.topAnchor),
-			noteTextView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-			noteTextView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-			noteTextView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+			noteTextView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: Sizes.Padding.normal),
+			noteTextView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.normal),
+			noteTextView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: Sizes.Padding.normal),
+			noteTextView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: Sizes.Padding.double)
 		])
 	}
 }
