@@ -8,9 +8,7 @@
 import Foundation
 
 enum Sizes {
-	
-	static let fontSizeEditor: CGFloat = 20
-	
+
 	enum Padding {
 		static let half: CGFloat = 8
 		static let normal: CGFloat = 16
