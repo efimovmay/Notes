@@ -68,7 +68,7 @@ private extension NoteEditorViewController {
 			noteTextView.contentInset = UIEdgeInsets(
 				top: 0,
 				left: 0,
-				bottom: keyboardViewEndFrame.height + Sizes.Padding.double,
+				bottom: keyboardViewEndFrame.height,
 				right: 0
 			)
 			noteTextView.scrollIndicatorInsets = noteTextView.contentInset
@@ -84,8 +84,11 @@ private extension NoteEditorViewController {
 		let textView = UITextView(frame: .zero, textContainer: nil)
 
 		textView.backgroundColor = Theme.backgroundColor
+		
+		textView.font = UIFont.preferredFont(forTextStyle: .body)
+		textView.adjustsFontForContentSizeCategory = true
+		
 		textView.isScrollEnabled = true
-		textView.font = UIFont.systemFont(ofSize: Sizes.fontSizeEditor)
 		textView.keyboardDismissMode = .onDrag
 		
 		return textView
@@ -125,8 +128,8 @@ private extension NoteEditorViewController {
 		NSLayoutConstraint.activate([
 			noteTextView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: Sizes.Padding.normal),
 			noteTextView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.normal),
-			noteTextView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: Sizes.Padding.normal),
-			noteTextView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: Sizes.Padding.double)
+			noteTextView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.normal),
+			noteTextView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -Sizes.Padding.normal)
 		])
 	}
 }
